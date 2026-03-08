@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+font-family:Arial;
+background:linear-gradient(135deg,#f3c6ff,#ffc6ea,#e0b6ff);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+h1{
+margin-bottom:30px;
+}
+
+/* cake container */
+
+.cake{
+position:relative;
+width:160px;
+height:120px;
+cursor:pointer;
+}
+
+/* cake halves */
+
+.half{
+position:absolute;
+width:80px;
+height:80px;
+bottom:0;
+transition:1s;
+}
+
+.left{
+left:0;
+}
+
+.right{
+right:0;
+}
+
+/* cake layers */
+
+.layer{
+position:absolute;
+width:80px;
+height:30px;
+border-radius:10px;
+}
+
+.l1{ background:#ffb3f7; bottom:0;}
+.l2{ background:#e5a6ff; bottom:30px;}
+.l3{ background:#d98cff; bottom:60px;}
+
+.icing{
+position:absolute;
+top:-10px;
+width:80px;
+height:20px;
+background:#ffd1f3;
+border-radius:10px;
+}
+
+/* candle */
+
+.candle{
+position:absolute;
+width:10px;
+height:30px;
+background:white;
+top:-40px;
+left:75px;
+border-radius:3px;
+}
+
+.flame{
+width:10px;
+height:14px;
+background:orange;
+border-radius:50%;
+position:absolute;
+top:-14px;
+animation:flicker .5s infinite alternate;
+}
+
+@keyframes flicker{
+from{transform:scale(1);}
+to{transform:scale(1.2);}
+}
+
+/* message */
+
+#message{
+margin-top:40px;
+font-size:28px;
+display:none;
+}
+
+/* confetti */
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Tap the cake 🎂</h1>
+
+<div class="cake" onclick="startSurprise()">
+
+<div class="half left" id="leftCake">
+<div class="icing"></div>
+<div class="layer l3"></div>
+<div class="layer l2"></div>
+<div class="layer l1"></div>
+</div>
+
+<div class="half right" id="rightCake">
+<div class="icing"></div>
+<div class="layer l3"></div>
+<div class="layer l2"></div>
+<div class="layer l1"></div>
+</div>
+
+<div class="candle">
+<div class="flame"></div>
+</div>
+
+</div>
+
+<div id="message">
+Heya Happy birthday to my beloved ex bsf !! 💜  
+<br><br>
+-From Ronju
+</div>
+
+<iframe id="music" width="0" height="0" allow="autoplay"></iframe>
+
+<script>
+
+function startSurprise(){
+
+/* cake split */
+
+document.getElementById("leftCake").style.transform="translateX(-70px) rotate(-15deg)";
+document.getElementById("rightCake").style.transform="translateX(70px) rotate(15deg)";
+
+/* show message */
+
+document.getElementById("message").style.display="block";
+
+/* music */
+
+document.getElementById("music").src =
+"https://www.youtube.com/embed/7HkG9Q2fN1k?autoplay=1&loop=1";
+
+/* confetti */
+
+for(let i=0;i<120;i++){
+
+let confetti=document.createElement("div");
+confetti.classList.add("confetti");
+
+confetti.style.left=Math.random()*100+"vw";
+confetti.style.animationDuration=(Math.random()*3+2)+"s";
+
+let colors=["#ffb3f7","#f6a6ff","#ffd1f3","#e5b3ff"];
+confetti.style.background=colors[Math.floor(Math.random()*colors.length)];
+
+document.body.appendChild(confetti);
+
+setTimeout(()=>{confetti.remove();},5000);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
